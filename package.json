@@ -1,0 +1,31 @@
+{
+  "name": "disney-villains-api",
+  "version": "1.0.0",
+  "description": "In this two part exercise you are tasked with create a REST API for accessing Disney Villain data, complete with test suite.",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "lint:eslint": "eslint --format stylish .",
+    "lint:fix": "eslint --format stylish --fix ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shane-Tierney/disney-villains-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shane-Tierney/disney-villains-api/issues"
+  },
+  "homepage": "https://github.com/Shane-Tierney/disney-villains-api#readme",
+  "devDependencies": {
+    "eslint": "^8.16.0"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16",
+    "sequelize": "^6.19.2"
+  }
+}
