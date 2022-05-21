@@ -21,24 +21,23 @@ const getVillainBySlug = async (request, response) => {
 }
 
 const createNewVillain = async (request, response) => {
-    const { name, movie, slug } = request.body
+  const { name, movie, slug } = request.body
 
-    if(!name || !movie || !slug) {
-        return response.status(400).send('The following fields are required: name, movie, slug')
-    }
+  if (!name || !movie || !slug) {
+    return response.status(400).send('The following fields are required: name, movie, slug')
+  }
 
-    const newVillain = await villains.create({
-        name,
-        movie,
-        slug
-    })
+  const newVillain = await villains.create({
+    name,
+    movie,
+    slug
+  })
 
-    return response.status(201).send(newVillain)
+  return response.status(201).send(newVillain)
 }
 
 const isRunning = () => {
-    console.log('server is up on http://localhost:1337') // eslint-disable-line no-console
-  }
+  console.log('server is up on http://localhost:1337') // eslint-disable-line no-console
+}
 
-  module.exports = { getAllVillains, getVillainBySlug, createNewVillain, isRunning }
-  
+module.exports = { getAllVillains, getVillainBySlug, createNewVillain, isRunning }
