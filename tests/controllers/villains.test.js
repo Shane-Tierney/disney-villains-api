@@ -1,10 +1,11 @@
+/* eslint-disable max-len */
 const chai = require('chai')
 const sinon = require('sinon')
 const sinonChai = require('sinon-chai')
 const { villains } = require('../../models/index')
 const { describe, it, afterEach, beforeEach } = require('mocha')
 const { villainsList, hercules, redSkull, badSkull } = require('../mocks/villains')
-const { getVillainBySlug, getAllVillains, createNewVillain } = require('../../controllers/villain')
+const { getVillainBySlug, getAllVillains, createNewVillain } = require('../../controllers/villains')
 
 
 chai.use(sinonChai)
@@ -54,14 +55,14 @@ describe('Controllers - villain', () => {
 
   describe('getVillainBySlug', () => {
     it('retrieves only the villain with the provided slug from the database, and responds with it', async () => {
-      const request = { params: { slug: 3 } }
+      const request = { params: { slug: 'hercules' } }
 
       stubbedFindOne.returns(hercules)
 
       await getVillainBySlug(request, response)
 
       expect(stubbedFindOne).to.have.been.calledWith({
-        where: { id: 3 },
+        where: { slug: 'hercules' },
       })
       expect(stubbedFindOne).to.have.callCount(1)
       expect(stubbedSend).to.have.been.calledWith(hercules)
@@ -81,20 +82,20 @@ describe('Controllers - villain', () => {
     })
 
     it('returns a 500 when the database errors out', async () => {
-      const request = { params: { slug: 3 } }
+      const request = { params: { slug: 'hercules' } }
 
       stubbedFindOne.throws('ERROR!')
 
       await getVillainBySlug(request, response)
 
       expect(stubbedFindOne).to.have.been.calledWith({
-        where: { slug: 3 },
+        where: { slug: 'hercules' },
       })
       expect(stubbedSendStatus).to.have.been.calledWith(500)
     })
   })
 
-  describe('saveNewVillain', () => {
+  describe('createNewVillain', () => {
     it('accepts a new villain and saves them as a new villain, then returns a status of 201 and the new villain', async () => {
       const request = { body: redSkull }
 
@@ -114,7 +115,7 @@ describe('Controllers - villain', () => {
 
       expect(stubbedStatus).to.have.been.calledWith(400)
 
-      expect(stubbedSend).to.have.been.calledWith('the following fields are required: location, mascot, abbreviation, conference, division')
+      expect(stubbedSend).to.have.been.calledWith('The following fields are required: name, movie, slug')
     })
 
     it('returns a 500 status code if the database fails', async () => {

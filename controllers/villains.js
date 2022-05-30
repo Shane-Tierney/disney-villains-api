@@ -1,10 +1,10 @@
-const villains = require('../models/index')
+const { villains } = require('../models/index')
 
 const getAllVillains = async (request, response) => {
   try {
     const listOfTeams = await villains.findAll()
 
-    return response.status(200).send(listOfTeams)
+    return response.send(listOfTeams)
   } catch (error) {
     return response.sendStatus(500)
   }
@@ -14,14 +14,18 @@ const getVillainBySlug = async (request, response) => {
   try {
     const { slug } = request.params
 
+    if (!slug) return response.sendStatus(404)
+
     const foundVillain = await villains.findOne({
       where: { slug: slug }
     })
 
+    if (!foundVillain) return response.sendStatus(404)
+
     if (foundVillain) {
-      return response.status(200).send(foundVillain)
+      return response.send(foundVillain)
     } else {
-      return response.status(404).send('Villain not found')
+      return response.send('Villain not found')
     }
   } catch (error) {
     return response.sendStatus(500)

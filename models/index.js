@@ -8,4 +8,4 @@ const connection = new Sequelize('disney', 'disney_user', 'disney1234', {
 
 const villains = villainsModel(connection, Sequelize)
 
-module.exports = villains
+module.exports = { villains }
